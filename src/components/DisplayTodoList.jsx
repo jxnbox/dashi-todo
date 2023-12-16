@@ -1,10 +1,16 @@
-const DisplayTodoList = () => {
+const DisplayTodoList = ({todoList, setTodoList}) => {
+
+    const handleOnClick = (todoPosition) => {
+        setTodoList((prevTodoList) => prevTodoList.filter((todo,i) => i !== todoPosition))
+    };
     return (
         <div>
             <ul>
-                <li>wash dishes</li>
-                <li>study for 1hr</li>
-                <li>cook food</li>
+                {todoList.map((todo, i) => {
+                    return (
+                        <li key={`${todo}-${i}`} id={`${todo}-${i}`}>{todo} <button onClick={() => handleOnClick(i)}>❌</button></li>
+                    )
+                })}
             </ul>
         </div>
     )
